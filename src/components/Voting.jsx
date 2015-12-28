@@ -11,6 +11,8 @@ export default React.createClass({
 
   // pair is not yet connected to the back-end
   // currently is a fake property set in index.jsx
+  // the component is pure (the same data coming in should get the same result)
+  // so really, it doesn't matter where it is at the moment
   getPair: function() {
     return this.props.pair || [];
   },
