@@ -1,7 +1,8 @@
 import Voting from '../../src/components/Voting';
-import React from 'react/addons';
+import React from 'react'
+import ReactTestUtils from 'react-addons-test-utils'
 
-const {renderIntoDocument} = React.addons.TestUtils;
+const {renderIntoDocument} = ReactTestUtils;
 
 
 describe('Voting', () => {
