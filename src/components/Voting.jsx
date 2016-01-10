@@ -19,7 +19,8 @@ export default React.createClass({
   render: function() {
     return <div className="voting">
       {this.getPair().map(entry =>
-        <button key={entry} style={buttonStyle}>
+        <button key={entry} style={buttonStyle}
+          onClick={() => this.props.vote(entry)}>
           {entry}
         </button>
       )}
