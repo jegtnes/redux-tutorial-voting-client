@@ -16,12 +16,21 @@ export default React.createClass({
   getPair: function() {
     return this.props.pair || [];
   },
+  isDisabled: function() {
+    return !!this.props.isDisabled;
+  },
+  hasVotedFor: function(entry) {
+    return this.props.hasVoted === entry;
+  },
   render: function() {
     return <div className="voting">
       {this.getPair().map(entry =>
         <button key={entry} style={buttonStyle}
+          disabled="{this.isDisabled}"
           onClick={() => this.props.vote(entry)}>
           {entry}
+          {this.hasVotedFor(entry) ?
+            <span className="label"> (Voted)</span> : null}
         </button>
       )}
     </div>;
