@@ -47,4 +47,14 @@ describe('Voting', () => {
     expect(buttons[0].hasAttribute('disabled')).to.equal(true);
     expect(buttons[1].hasAttribute('disabled')).to.equal(true);
   });
+
+  it('adds a label to indicate which component is disabled', () => {
+    const component = renderIntoDocument(
+      <Voting pair={["Trainspotting", "28 Days Later"]} hasVoted="Trainspotting" />
+    );
+
+    const button = scryRenderedDOMComponentsWithTag(component, 'button')[0];
+
+    expect(button.textContent).to.contain('Voted');
+  });
 });
