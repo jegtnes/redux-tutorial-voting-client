@@ -28,7 +28,7 @@ export default React.createClass({
         <div ref="winner">Winner is {this.props.winner}</div> :
         this.getPair().map(entry =>
         <button key={entry} style={buttonStyle}
-          disabled="{this.isDisabled}"
+          disabled={this.isDisabled()}
           onClick={() => this.props.vote(entry)}>
           {entry}
           {this.hasVotedFor(entry) ?
