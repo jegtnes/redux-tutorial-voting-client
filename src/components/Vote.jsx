@@ -1,4 +1,5 @@
 import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 let buttonStyle = {
   background: '#9999dd',
@@ -8,6 +9,7 @@ let buttonStyle = {
 }
 
 export default React.createClass({
+  mixins: [PureRenderMixin],
 
   // pair is not yet connected to the back-end
   // currently is a fake property set in index.jsx
