@@ -6,12 +6,20 @@ export default React.createClass({
   getPair: function() {
     return this.props.pair || [];
   },
+  getVotes: function(entry) {
+    if (this.props.tally && this.props.tally.has(entry)) {
+      return this.props.tally.get(entry)
+    }
+    else return 0;
+  },
   render: function() {
     return <div className="results">
       {this.getPair().map(entry =>
-        <div key={entry} className="entry">
-          <h1>{entry}</h1>
-        </div>
+      <div key={entry} className="entry">
+        <h1>
+          {entry} <small>({this.getVotes(entry)})</small>
+        </h1>
+      </div>
       )}
     </div>;
   }
