@@ -14,13 +14,18 @@ export default React.createClass({
   },
   render: function() {
     return <div className="results">
-      {this.getPair().map(entry =>
-      <div key={entry} className="entry">
-        <h1>
-          {entry} <small>({this.getVotes(entry)})</small>
-        </h1>
+      <div className="tally">
+        {this.getPair().map(entry =>
+        <div key={entry} className="entry">
+          <h1>
+            {entry} <small>({this.getVotes(entry)})</small>
+          </h1>
+        </div>
+        )}
       </div>
-      )}
+      <div className="management">
+        <button ref="next" className="next" onClick={this.props.next}>Next</button>
+      </div>
     </div>;
   }
 })
