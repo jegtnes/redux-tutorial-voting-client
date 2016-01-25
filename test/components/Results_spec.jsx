@@ -4,7 +4,7 @@ import ReactTestUtils from 'react-addons-test-utils'
 import {List, Map} from 'immutable';
 import {expect} from 'chai';
 
-const {renderIntoDocument, scryRenderedDOMComponentsWithClass} = ReactTestUtils;
+const {renderIntoDocument, scryRenderedDOMComponentsWithClass, Simulate} = ReactTestUtils;
 
 describe('Results', () => {
   it('renders entries with vote counts or zero', () => {
@@ -26,5 +26,23 @@ describe('Results', () => {
     expect(trainspotting).to.contain('5');
     expect(twentyeightdays).to.contain('28 Days Later');
     expect(twentyeightdays).to.contain('0');
+  });
+
+  it('invokes the next callback when the next button is clicked', () => {
+    let nextInvoked = false;
+
+    // a function that sets nextinvoked to true
+    const next = () => nextInvoked = true;
+
+    const pair = List.of('Trainspotting', '28 Days Later');
+    const component = renderIntoDocument(
+      <Results pair={pair}
+               tally={Map()}
+               next={next} />
+    );
+
+    expect(nextInvoked).to.equal(false);
+    Simulate.click(React.findDOMNode(component.refs.next));
+    expect(nextInvoked).to.equal(true);
   });
 });
