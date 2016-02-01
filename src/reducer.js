@@ -1,4 +1,4 @@
-import {Map} from 'immutable';
+import {List, Map} from 'immutable';
 
 // Merge is apparently a function of Immutable maps
 function setState(state, newState) {
@@ -15,11 +15,22 @@ function vote(state, entry) {
   }
 }
 
+function resetVote(state) {
+  const vote = state.get('hasVoted');
+  const currentPair = state.getIn(['vote', 'pair'], List());
+
+  if (vote && !currentPair.includes(vote)) {
+    return state.remove('hasVoted');
+  } else {
+    return state;
+  }
+}
+
 export default function(state = Map(), action) {
 
   switch(action.type) {
     case 'SET_STATE':
-    return setState(state, action.state);
+    return resetVote(setState(state, action.state));
     case 'VOTE':
     return vote(state, action.entry);
   }
