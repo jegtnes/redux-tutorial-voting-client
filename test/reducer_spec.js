@@ -108,4 +108,31 @@ describe('reducer', () => {
       }
     }));
   });
+
+  it('removes hasVoted on SET_STATE if the voting pair changes', () => {
+    const state = fromJS({
+      vote: {
+        pair: ['Trainspotting', '28 Days Later'],
+        tally: {Trainspotting: 1}
+      },
+      hasVoted: 'Trainspotting'
+    });
+
+    const action = {
+      type: 'SET_STATE',
+      state: {
+        vote: {
+          pair: ['Slumdog Millionaire', 'Sunshine']
+        },
+      }
+    };
+
+    const nextState = reducer(state, action);
+
+    expect(nextState).to.equal(fromJS({
+      vote: {
+        pair: ['Slumdog Millionaire', 'Sunshine']
+      }
+    }));
+  });
 });
