@@ -1,4 +1,4 @@
-import Results from '../../src/components/Results';
+import {Results} from '../../src/components/Results';
 import React from 'react'
 import ReactTestUtils from 'react-addons-test-utils'
 import {List, Map} from 'immutable';

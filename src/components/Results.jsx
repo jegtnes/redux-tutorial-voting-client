@@ -1,9 +1,10 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import {connect} from 'react-redux';
 import Tally from './Tally';
 import Winner from './Winner';
 
-export default React.createClass({
+export const Results = React.createClass({
   mixins: ['PureRenderMixin'],
   render: function() {
     return this.props.winner ?
@@ -16,3 +17,18 @@ export default React.createClass({
     </div>
   }
 })
+
+// Takes a state from our Redux store and merges them into this component.
+// from react-redux's connect
+// This will also keep the component in sync. Which is pretty cool.
+function mapStateToProps(state) {
+  return {
+    pair: state.getIn(['vote', 'pair']),
+    tally: state.getIn(['vote', 'tally']),
+    winner:  state.get('winner')
+  }
+}
+
+// This component now has two versions: A pure one (Results)
+// and a connected one (ResultsContainer) which is wrapped in react-redux magic.
+export const ResultsContainer = connect(mapStateToProps)(Results);
