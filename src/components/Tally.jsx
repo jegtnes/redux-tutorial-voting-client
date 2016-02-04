@@ -23,9 +23,6 @@ export default React.createClass({
         </div>
         )}
       </div>
-      <div className="management">
-        <button id="nextButton" className="next" onClick={this.props.next}>Next</button>
-      </div>
     </div>
   }
 })
