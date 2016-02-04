@@ -12,7 +12,15 @@
  */
 
 
-export default store => next => action => {
-  console.log('in middleware', action);
+export default socket => store => next => action => {
+
+  // we only want to emit some events back to the server, and not all of them
+  // this will avoid infinite loops and other such unsavoury scenarios.
+  // e.g. if we send SET_STATE back to the server, it will do nothing with it
+  // yet trigger the listener, causing a new SET_STATE.
+  // You can see where that is heading, and it's no good.
+  if (action.meta && action.meta.remote) {
+    socket.emit('action', action)
+  }
   return next(action);
 }
